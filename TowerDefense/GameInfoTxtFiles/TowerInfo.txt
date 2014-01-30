@@ -1,0 +1,2 @@
+name=missile|cost=10|range=4f|damage=1.0f|firespeed=1.5f
+name=shot|cost=5|range=3f|damage=.2f|firespeed=.5f
