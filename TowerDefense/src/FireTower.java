@@ -17,8 +17,14 @@ public class FireTower extends Tower{
 	 */
 	@Override
 	public void Attack(Creep inTarget){
-//		Projectile bullet = new Projectile();
-		System.out.println("Fire Overriden");
+		//shoot projectile
+		Projectile bullet = new Projectile(4, position, target);
+		projectiles.add(bullet);
+		
+		Effect();
+				
+////		Projectile bullet = new Projectile();
+//		System.out.println("Fire Overriden");
 	}
 	/**
 	 * 
