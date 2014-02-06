@@ -8,14 +8,49 @@ public class Projectile extends Entity{
 	BaseGameFunctions bgf = new BaseGameFunctions();
 	Creep destination;
 	Point2D movement;
+	String type;
+	
 	
 	public Projectile(double inSpeed, Point2D inPosition, Creep inDestination) {
 		super(inPosition, inSpeed);
 		destination = inDestination;
-		// TODO Auto-generated constructor stub
+		type = "";
+		isAlive = true;
 	}
+	
+	public Projectile(double inSpeed, Point2D inPosition, Creep inDestination, String inType) {
+		super(inPosition, inSpeed);
+		destination = inDestination;
+		type = inType;
+		isAlive = true;
+	}
+	
+	public void ReuseProjectile(double inSpeed, Point2D inPosition, Creep inDestination){
+		position = inPosition;
+		speed = inSpeed;
+		destination = inDestination;
+		type = "";
+		isAlive = true;
+	}
+	
+	public void ReuseProjectile(double inSpeed, Point2D inPosition, Creep inDestination, String inType){
+		position = inPosition;
+		speed = inSpeed;
+		destination = inDestination;
+		type = inType;
+		isAlive = true;
+	}
+	
 	public void Draw(Graphics g){
-		Image temp = ContentBank.arrow; //Main.arrowTower;
+		Image temp;
+		if(type.equalsIgnoreCase("fire"))
+			temp = ContentBank.fireBall;
+		else if(type.equalsIgnoreCase("ice"))
+			temp = ContentBank.iceBall;
+		else if(type.equalsIgnoreCase("poison"))
+			temp = ContentBank.poisonArrow;
+		else
+			temp = ContentBank.arrow;
 		AffineTransform at = new AffineTransform();
 		at.translate(position.getX(), position.getY());//texture.getWidth(null)/2, texture.getHeight(null)/2);
 		at.rotate(rotation);

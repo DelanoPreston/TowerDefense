@@ -11,14 +11,19 @@ public class IceTower extends Tower {
 		super(inType, position, inTeam, inLevel);
 		// TODO Auto-generated constructor stub
 	}
+	
 	/**
 	 * 
 	 */
 	@Override
 	public void Attack(Creep inTarget){
 		//shoot projectile
-		System.out.println("Ice Overriden");
+		Projectile bullet = new Projectile(4, position, target, "ice");
+		projectiles.add(bullet);
+		
+		Effect();
 	}
+	
 	/**
 	 * 
 	 */

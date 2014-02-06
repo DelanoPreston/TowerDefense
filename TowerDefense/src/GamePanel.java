@@ -165,10 +165,23 @@ public class GamePanel extends JPanel{
 			
 			alskdjf++;
 			
-			if(alskdjf > 100){
-				Creep tempCreep = new Creep(1.0, map.mapPath, 10.0, 1);
-				creeps.add(tempCreep);
-				alskdjf -= 100;
+			if(alskdjf > 10){
+				Boolean didIReuse = false;
+				
+				for(int i = 0; i < creeps.size(); i ++)
+				{
+					if(!creeps.get(i).isAlive){
+						creeps.get(i).ReuseCreep(1.0, map.mapPath, 10.0, 1);
+						didIReuse = true;
+						break;
+					}
+				}
+				if(!didIReuse)
+				{
+					Creep tempCreep = new Creep(1.0, map.mapPath, 10.0, 1);
+					creeps.add(tempCreep);
+				}
+				alskdjf -= 10;
 			}
 		}
 	}

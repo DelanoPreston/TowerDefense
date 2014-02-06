@@ -17,7 +17,10 @@ public class PoisonTower extends Tower {
 	@Override
 	public void Attack(Creep inTarget){
 		//shoot projectile
-		System.out.println("Poison Overriden");
+		Projectile bullet = new Projectile(4, position, target, "poison");
+		projectiles.add(bullet);
+		
+		Effect();
 	}
 	/**
 	 * 

@@ -22,6 +22,17 @@ public class Creep extends Entity{
 		
 	}
 	
+	public void ReuseCreep(double inSpeed, List<Point2D> inPath, double inHealth, int inTeam){
+		position = inPath.get(0);
+		speed = inSpeed;
+		path = TilesToCoords(inPath);
+		health = inHealth;
+		//movementTemp = new Point2D.Double(0, 0);
+		pathProgress = 1;
+		
+		isAlive = true;
+	}
+	
 	public void ProjectileHitCreep(float damage){
 		health = health - damage;
 	}

@@ -19,8 +19,8 @@ public class Tower extends Entity{
 	BaseGameFunctions bgf = new BaseGameFunctions();
 	public GamePanel theMapTemp;
 	
-	/**Constructor for Tower
-	 * 
+	/**
+	 * Constructor for Tower
 	 * @param inType - type of tower, might remove when polymorphism implemented
 	 * @param position - position of towers center
 	 * @param inTeam - team the tower belongs to
@@ -66,6 +66,8 @@ public class Tower extends Entity{
 				projectiles.get(i).Update();
 		}
 	}
+	
+	
 	/**
 	 * the Draw method for Tower
 	 */
@@ -87,13 +89,26 @@ public class Tower extends Entity{
 	
 	
 	public void Attack(Creep inTarget){
-		//shoot projectile
-		Projectile bullet = new Projectile(4, position, target);
-		projectiles.add(bullet);
+		//check if there are any unused projectile objects
+		Boolean didIReuse = false;
 		
-//		System.out.println("not overriden");
+		for(int i = 0; i < projectiles.size(); i ++)
+		{
+			if(!projectiles.get(i).isAlive){
+				projectiles.get(i).ReuseProjectile(4, position, target);
+				didIReuse = true;
+				break;
+			}
+		}
+		if(!didIReuse)
+		{
+			Projectile bullet = new Projectile(4, position, target);
+			projectiles.add(bullet);
+		}
+		
 		Effect();
 	}
+	
 	/**
 	 * 
 	 */
