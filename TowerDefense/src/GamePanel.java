@@ -20,9 +20,7 @@ import javax.swing.Timer;
  */
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
-	
 	int timer = 0;
-	
 	Timer mainTimer;
 	GameFunctions.BaseGameFunctions bgf;
 	PopupListener popupListener;
@@ -102,17 +100,6 @@ public class GamePanel extends JPanel{
 				tempCreepRemove = c;
 		}
 		creeps.remove(tempCreepRemove);
-		
-		
-		
-//		for(int i = 0; i < towers.size(); i++){
-//			towers.get(i).Update();
-//		}
-//		for(int i = 0; i < creeps.size(); i++){
-//			if(creeps.get(i).isAlive){
-//				creeps.get(i).Update();
-//			}
-//		}
 	}
 	
 	/**

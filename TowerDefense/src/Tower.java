@@ -41,6 +41,7 @@ public class Tower extends Entity{
 	 */
 	@Override
 	public void Update(){
+		//this will find the target if the tower does not currently have one
 		if(target == null && theMapTemp.creeps.size() > 0){
 			for(int i = 0; i < theMapTemp.creeps.size(); i ++){
 				if(theMapTemp.creeps.get(i).isAlive && bgf.GetDistance(this.position, theMapTemp.creeps.get(i).position) < range){
@@ -49,25 +50,22 @@ public class Tower extends Entity{
 				}
 			}
 		}
+		//this will rotate the tower to track the creep, and fire at the creep, also null the target if it gets too far away
 		else if(target != null){
 			timer++;
 			rotation = bgf.GetAngleRad(position, target.position);
+			
+			if(timer > fireSpeed){
+				Attack(target);
+				timer = timer - fireSpeed;
+			}
+			
 			if(bgf.GetDistance(this.position, target.position) > range || target.health <= 0.0){
 				target = null;
 			}
 		}
-		if(target != null && timer > fireSpeed){
-			Attack(target);
-			
-			timer = timer - fireSpeed;
-		}
-		for(Projectile p : projectiles){
-			if(p.isAlive)
-				p.Update();
-			else
-				projectiles.remove(p);
-		}
 		
+		//this update the projectiles of the tower
 		Projectile tempProjectileRemove = null;
 		for(Projectile p : projectiles){
 			p.Update();
@@ -76,7 +74,6 @@ public class Tower extends Entity{
 		}
 		projectiles.remove(tempProjectileRemove);
 	}
-	
 	
 	/**
 	 * the Draw method for Tower
@@ -97,9 +94,11 @@ public class Tower extends Entity{
 		}
 	}
 	
-	
+	/**
+	 * this method creates a new projectile that heads towards the target
+	 * @param inTarget
+	 */
 	public void Attack(Creep inTarget){
-		
 		Projectile bullet = new Projectile(4, position, target);
 		projectiles.add(bullet);
 		
@@ -107,7 +106,7 @@ public class Tower extends Entity{
 	}
 	
 	/**
-	 * 
+	 * not really implemented yet.
 	 */
 	public void Effect(){
 		//set effect on creep
