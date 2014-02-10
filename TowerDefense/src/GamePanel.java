@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JMenuItem;
@@ -20,7 +21,7 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
 	
-	int alskdjf = 0;
+	int timer = 0;
 	
 	Timer mainTimer;
 	GameFunctions.BaseGameFunctions bgf;
@@ -86,14 +87,32 @@ public class GamePanel extends JPanel{
 	 * Update Method, Action performed calls this to update game
 	 */
 	public void Update(){
-		for(int i = 0; i < towers.size(); i++){
-			towers.get(i).Update();
+		Tower tempTowerRemove = null;
+		for(Tower t : towers){
+			t.Update();
+			if(!t.isAlive)
+				tempTowerRemove = t;
 		}
-		for(int i = 0; i < creeps.size(); i++){
-			if(creeps.get(i).isAlive){
-				creeps.get(i).Update();
-			}
+		towers.remove(tempTowerRemove);
+		
+		Creep tempCreepRemove = null;
+		for(Creep c : creeps){
+			c.Update();
+			if(!c.isAlive)
+				tempCreepRemove = c;
 		}
+		creeps.remove(tempCreepRemove);
+		
+		
+		
+//		for(int i = 0; i < towers.size(); i++){
+//			towers.get(i).Update();
+//		}
+//		for(int i = 0; i < creeps.size(); i++){
+//			if(creeps.get(i).isAlive){
+//				creeps.get(i).Update();
+//			}
+//		}
 	}
 	
 	/**
@@ -161,26 +180,12 @@ public class GamePanel extends JPanel{
 			Update();
 			repaint();
 			
-			alskdjf++;
-			
-			if(alskdjf > 10){
-				Boolean didIReuse = false;
-				
-				for(int i = 0; i < creeps.size(); i ++)
-				{
-					if(!creeps.get(i).isAlive){
-						creeps.get(i).ReuseCreep(1.0, map.mapPath, 10.0, 1);
-						didIReuse = true;
-						break;
-					}
-				}
-				if(!didIReuse)
-				{
-					Creep tempCreep = new Creep(1.0, map.mapPath, 10.0, 1);
-					creeps.add(tempCreep);
-				}
-				alskdjf -= 10;
+			if(timer >= 25){
+				Creep tempCreep = new Creep(1.0, map.mapPath, 10.0, 1);
+				creeps.add(tempCreep);
+				timer = 0;
 			}
+			timer++;
 		}
 	}
 	

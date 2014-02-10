@@ -61,10 +61,20 @@ public class Tower extends Entity{
 			
 			timer = timer - fireSpeed;
 		}
-		for(int i = 0; i < projectiles.size(); i ++){
-			if(projectiles.get(i).isAlive)
-				projectiles.get(i).Update();
+		for(Projectile p : projectiles){
+			if(p.isAlive)
+				p.Update();
+			else
+				projectiles.remove(p);
 		}
+		
+		Projectile tempProjectileRemove = null;
+		for(Projectile p : projectiles){
+			p.Update();
+			if(!p.isAlive)
+				tempProjectileRemove = p;
+		}
+		projectiles.remove(tempProjectileRemove);
 	}
 	
 	
@@ -89,22 +99,9 @@ public class Tower extends Entity{
 	
 	
 	public void Attack(Creep inTarget){
-		//check if there are any unused projectile objects
-		Boolean didIReuse = false;
 		
-		for(int i = 0; i < projectiles.size(); i ++)
-		{
-			if(!projectiles.get(i).isAlive){
-				projectiles.get(i).ReuseProjectile(4, position, target);
-				didIReuse = true;
-				break;
-			}
-		}
-		if(!didIReuse)
-		{
-			Projectile bullet = new Projectile(4, position, target);
-			projectiles.add(bullet);
-		}
+		Projectile bullet = new Projectile(4, position, target);
+		projectiles.add(bullet);
 		
 		Effect();
 	}
