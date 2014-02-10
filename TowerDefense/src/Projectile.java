@@ -5,7 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 public class Projectile extends Entity{
-	BaseGameFunctions bgf = new BaseGameFunctions();
+	GameFunctions.BaseGameFunctions bgf = new GameFunctions.BaseGameFunctions();
 	Creep destination;
 	Point2D movement;
 	String type;

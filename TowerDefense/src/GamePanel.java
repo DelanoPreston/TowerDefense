@@ -14,8 +14,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
-
-
 /**
  * GamePanel class that extends JPanel
  */
@@ -25,7 +23,7 @@ public class GamePanel extends JPanel{
 	int alskdjf = 0;
 	
 	Timer mainTimer;
-	BaseGameFunctions bgf;
+	GameFunctions.BaseGameFunctions bgf;
 	PopupListener popupListener;
 	IOClass fileStuff;
 	Map map;
@@ -39,7 +37,7 @@ public class GamePanel extends JPanel{
 		setFocusable(true);
 		
 		//base game functions object declaration
-		bgf = new BaseGameFunctions();
+		bgf = new GameFunctions.BaseGameFunctions();
 		
 		//creates the popup menu
 		CreatePopupMenu();

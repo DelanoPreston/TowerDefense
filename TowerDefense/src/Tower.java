@@ -16,7 +16,7 @@ public class Tower extends Entity{
 	List<Projectile> projectiles = new ArrayList<Projectile>();
 	Creep target;
 //	Level currentMapLevel;
-	BaseGameFunctions bgf = new BaseGameFunctions();
+	GameFunctions.BaseGameFunctions bgf = new GameFunctions.BaseGameFunctions();
 	public GamePanel theMapTemp;
 	
 	/**

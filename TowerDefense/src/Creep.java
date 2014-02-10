@@ -10,7 +10,7 @@ public class Creep extends Entity{
 	List<Point2D> path;// = new ArrayList<Point2D>();
 	int pathProgress = 0;
 	public double health;
-	BaseGameFunctions bgf = new BaseGameFunctions();
+	GameFunctions.BaseGameFunctions bgf = new GameFunctions.BaseGameFunctions();
 	
 	public Creep(double inSpeed, List<Point2D> inPath, double inHealth, int inTeam){
 		super(TileToCoords(inPath.get(0)), inSpeed);//it is starting in the tile location coords, not the map coords
