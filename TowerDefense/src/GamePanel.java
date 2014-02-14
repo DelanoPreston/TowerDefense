@@ -28,7 +28,7 @@ public class GamePanel extends JPanel{
 	GameFunctions.BaseGameFunctions bgf;
 	PopupListener popupListener;
 	IOClass fileStuff;
-//	Map map;
+	Player player;
 	Level level;
 	public List<Tower> towers = new ArrayList<Tower>();
 	public List<Creep> creeps = new ArrayList<Creep>();
@@ -52,6 +52,8 @@ public class GamePanel extends JPanel{
 		fileStuff = new IOClass();
 		level = new Level(fileStuff.GetMapAt(1));
 //		map = fileStuff.GetMapAt(1);
+		
+		player = new Player();
 		
 		//timer for updating game every 10 miliseconds
 		mainTimer = new Timer(10, new TimerListener());
@@ -103,8 +105,10 @@ public class GamePanel extends JPanel{
 		Creep tempCreepRemove = null;
 		for(Creep c : creeps){
 			c.Update();
-			if(!c.isAlive)
+			if(!c.isAlive){
 				tempCreepRemove = c;
+				player.money += 1;
+			}	
 		}
 		creeps.remove(tempCreepRemove);
 	}
@@ -128,6 +132,8 @@ public class GamePanel extends JPanel{
 		for(int i = 0; i < creeps.size(); i++){
 			creeps.get(i).Draw(g);
 		}
+		
+		g.drawString(Integer.toString(player.money), 0, 365);
 	}
 	
 	/**
@@ -155,16 +161,25 @@ public class GamePanel extends JPanel{
 			towers.add(tempPoisonTower);
 			break;//*/
 		default:
-			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-			MapTile tempTile = level.map.GetTileAtLocation(tempPoint2D);
-			if(tempTile.occupied == false && tempTile.tileType == MapTile.TileType.Grass){
-				level.map.GetTileAtLocation(tempPoint2D).occupied = true;
-				Tower tempTower = new Tower("awesome", tempPoint2D, 1, this);
-				towers.add(tempTower);
+			if(player.money >= 10){
+				tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+				MapTile tempTile = level.map.GetTileAtLocation(tempPoint2D);
+				if(tempTile.occupied == false){
+					if(tempTile.tileType == MapTile.TileType.Grass){
+						player.money -= 10;
+						level.map.GetTileAtLocation(tempPoint2D).occupied = true;
+						Tower tempTower = new Tower("awesome", tempPoint2D, 1, this);
+						towers.add(tempTower);
+					}
+					else{
+						System.out.println("towers can only be created on grass");
+					}
+				}else{
+					System.out.println("tower already present here");
+				}
 			}else{
-				System.out.println("tower already present here, or not grass");
+				System.out.println("Not enough money");
 			}
-			
 			break;
 		}
 	}
