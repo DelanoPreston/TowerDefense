@@ -139,25 +139,32 @@ public class GamePanel extends JPanel{
 	public void NewTower(ContentBank.TowerType inType){
 		Point2D tempPoint2D = null;
 		switch(inType){
-//		case Fire:
-//			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-//			Tower tempFireTower = new FireTower("Fiya Towa", tempPoint2D, 1, this);
-//			towers.add(tempFireTower);
-//			break;
-//		case Ice:
-//			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-//			Tower tempIceTower = new IceTower("Iyace Towa", tempPoint2D, 1, this);
-//			towers.add(tempIceTower);
-//			break;	
-//		case Poison:
-//			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-//			Tower tempPoisonTower = new PoisonTower("Poysan Towa", tempPoint2D, 1, this);
-//			towers.add(tempPoisonTower);
-//			break;
+		/*case Fire:
+			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+			Tower tempFireTower = new FireTower("Fiya Towa", tempPoint2D, 1, this);
+			towers.add(tempFireTower);
+			break;
+		case Ice:
+			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+			Tower tempIceTower = new IceTower("Iyace Towa", tempPoint2D, 1, this);
+			towers.add(tempIceTower);
+			break;	
+		case Poison:
+			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+			Tower tempPoisonTower = new PoisonTower("Poysan Towa", tempPoint2D, 1, this);
+			towers.add(tempPoisonTower);
+			break;//*/
 		default:
 			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-			Tower tempTower = new Tower("awesome", tempPoint2D, 1, this);
-			towers.add(tempTower);
+			MapTile tempTile = level.map.GetTileAtLocation(tempPoint2D);
+			if(tempTile.occupied == false && tempTile.tileType == MapTile.TileType.Grass){
+				level.map.GetTileAtLocation(tempPoint2D).occupied = true;
+				Tower tempTower = new Tower("awesome", tempPoint2D, 1, this);
+				towers.add(tempTower);
+			}else{
+				System.out.println("tower already present here, or not grass");
+			}
+			
 			break;
 		}
 	}

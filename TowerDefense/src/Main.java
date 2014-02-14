@@ -8,7 +8,7 @@ public class Main {
 		ContentBank.ContentLoader();
 		JFrame frame = new JFrame();
 		GamePanel gamePanel = new GamePanel();
-		frame.setSize(550, 550);
+		frame.setSize(350, 375);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);

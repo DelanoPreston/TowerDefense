@@ -1,4 +1,5 @@
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,9 +39,10 @@ public class Map {
 		}
 		return temp;
 	}
-		public Point2D GetTileAtLocation(int x, int y){
-			
-			
-			return null;
-		}
+	public MapTile GetTileAtLocation(Point2D inLocation){
+		int x = (int)(inLocation.getX()) / 32;
+		int y = (int)(inLocation.getY()) / 32;
+		MapTile temp = map[y][x];
+		return temp;
+	}
 }
