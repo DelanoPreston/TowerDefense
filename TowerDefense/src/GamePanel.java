@@ -106,8 +106,13 @@ public class GamePanel extends JPanel{
 		for(Creep c : creeps){
 			c.Update();
 			if(!c.isAlive){
+				if(c.health == 0){
+					player.money += 1;
+					player.score += 1;
+				}else if(c.health > 0){
+					player.villagers -= 1;
+				}
 				tempCreepRemove = c;
-				player.money += 1;
 			}	
 		}
 		creeps.remove(tempCreepRemove);
@@ -133,7 +138,9 @@ public class GamePanel extends JPanel{
 			creeps.get(i).Draw(g);
 		}
 		
-		g.drawString(Integer.toString(player.money), 0, 365);
+		g.drawString("Money: " + Integer.toString(player.money), 0, 365);
+		g.drawString("Score: " + Integer.toString(player.score), 125, 365);
+		g.drawString("Villagers: " + Integer.toString(player.villagers), 250, 365);
 	}
 	
 	/**
