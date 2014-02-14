@@ -1,12 +1,12 @@
+import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class Map {
+public class Map{// extends JComponent{
 	String levelName = "";
 	char[][] mapKey;
 	MapTile[][] map;
@@ -21,7 +21,11 @@ public class Map {
 		mapImageKey = inMapImageKey;
 		map = SetMapTiles();
 	}
-	public void Draw(Graphics2D g2D) {
+	
+//	@Override
+//	public void paintComponent(Graphics g) {
+	public void Draw(Graphics g) {
+		Graphics2D g2D = (Graphics2D)g;
 		// draw stuff
 		for(int i = 0; i < mapKey.length; i++){
 			for(int j = 0; j < mapKey[i].length; j++){

@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 
 public class ContentBank {
 //	public static enum TileType {Grass, Path, Start, End};
-	public static enum TowerType {Standard, Poison, Fire, Ice};
-	public static enum Effect {Burn, Slow, Poison};
+//	public static enum TowerType {Standard, Poison, Fire, Ice};
+//	public static enum Effect {Burn, Slow, Poison};
 	
 	public static Image end, grass, path, start;
 	public static Image standardTower, poisonTower, fireTower, iceTower;

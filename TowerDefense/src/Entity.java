@@ -1,7 +1,9 @@
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
-public class Entity{
+import javax.swing.JComponent;
+
+public class Entity extends JComponent{
 	int team;
 	double rotation;
 	Point2D position;
@@ -29,6 +31,12 @@ public class Entity{
 	public void Update(){
 		
 	}
+	
+	@Override
+	public void paintComponent(Graphics g){
+		
+	}
+	
 	public void Draw(Graphics g){
 		
 	}

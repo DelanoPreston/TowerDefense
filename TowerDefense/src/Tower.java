@@ -79,6 +79,7 @@ public class Tower extends Entity{
 	 * the Draw method for Tower
 	 */
 	@Override
+	//public void paintComponent(Graphics g){
 	public void Draw(Graphics g){
 		Image temp = ContentBank.standardTower; //Main.arrowTower;
 		AffineTransform at = new AffineTransform();

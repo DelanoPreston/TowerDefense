@@ -121,12 +121,12 @@ public class GamePanel extends JPanel{
 	/**
 	 * Paint Method, Action performed repaint to paint the game
 	 */
-	public void paint(Graphics g){
-		super.paint(g);
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		Graphics2D g2D = (Graphics2D) g;
 		
 		//draws the map
-		level.map.Draw(g2D);
+		level.map.Draw(g);
 		
 		//goes through the list of towers and calls the draw method
 		for(int i = 0; i < towers.size(); i++){
@@ -149,7 +149,7 @@ public class GamePanel extends JPanel{
 	 * 
 	 * @param inType - the type that the tower will be
 	 */
-	public void NewTower(ContentBank.TowerType inType){
+	public void NewTower(TowerType inType){
 		Point2D tempPoint2D = null;
 		switch(inType){
 		/*case Fire:
@@ -252,7 +252,7 @@ public class GamePanel extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			
 			if(arg0.paramString().contains("Standard")){
-				NewTower(ContentBank.TowerType.Standard);
+				NewTower(TowerType.Standard);
 			}/*
 			if(arg0.paramString().contains("Fire")){
 				NewTower(ContentBank.TowerType.Fire);

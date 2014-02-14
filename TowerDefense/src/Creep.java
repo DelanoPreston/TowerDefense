@@ -72,6 +72,7 @@ public class Creep extends Entity{
 		}
 	}
 	@Override
+//	public void paintComponent(Graphics g){
 	public void Draw(Graphics g){
 		if(isAlive){
 			AffineTransform at = new AffineTransform();
