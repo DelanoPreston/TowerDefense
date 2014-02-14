@@ -7,6 +7,7 @@ public class MapTile {
 	String tileType = "";
 	Point2D tilePosition;
 	Rectangle tileArea = null;
+	boolean occupied = false;
 	
 	public MapTile(String inType, Point2D inPosition){
 		tileType = inType;

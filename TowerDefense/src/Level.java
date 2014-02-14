@@ -1,5 +1,4 @@
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,30 +9,11 @@ public class Level{
 	int lives;
 	int money;
 	
-	public Level(){
+	public Level(Map inMap){
 		towers = new ArrayList<Tower>();
 		creeps = new ArrayList<Creep>();
-		map = new Map();
+		map = inMap;
 		lives = 10;
 		money = 15;
-	}
-	
-	public void keyPressed(KeyEvent e){
-//		int key = e.getKeyCode();
-		
-//		if(key == KeyEvent.VK_W){
-//			velY = -2;
-//		}
-	}
-	public void keyReleased(KeyEvent e){
-//		int key = e.getKeyCode();
-//		if(key == KeyEvent.VK_W){
-//		velY = -2;
-//		}
-	}
-	
-	public void AddTower(){
-//		Tower t = new Tower("Missile", new Point(1,1), 1, this);
-//		towers.add(t);
 	}
 }

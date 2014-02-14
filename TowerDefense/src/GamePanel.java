@@ -8,13 +8,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
+
+//import ImplementLater.FireTower;
+//import ImplementLater.IceTower;
+//import ImplementLater.PoisonTower;
 /**
  * GamePanel class that extends JPanel
  */
@@ -25,7 +28,8 @@ public class GamePanel extends JPanel{
 	GameFunctions.BaseGameFunctions bgf;
 	PopupListener popupListener;
 	IOClass fileStuff;
-	Map map;
+//	Map map;
+	Level level;
 	public List<Tower> towers = new ArrayList<Tower>();
 	public List<Creep> creeps = new ArrayList<Creep>();
 	
@@ -46,7 +50,8 @@ public class GamePanel extends JPanel{
 		
 		//makes the file io class, and gets the map data
 		fileStuff = new IOClass();
-		map = fileStuff.GetMapAt(1);
+		level = new Level(fileStuff.GetMapAt(1));
+//		map = fileStuff.GetMapAt(1);
 		
 		//timer for updating game every 10 miliseconds
 		mainTimer = new Timer(10, new TimerListener());
@@ -66,6 +71,8 @@ public class GamePanel extends JPanel{
         menuItem = new JMenuItem("Tower:Standard");
         menuItem.addActionListener(menuListener);
         popup.add(menuItem);
+        
+        /*
         menuItem = new JMenuItem("Tower:Fire");
         menuItem.addActionListener(menuListener);
         popup.add(menuItem);
@@ -74,7 +81,7 @@ public class GamePanel extends JPanel{
         popup.add(menuItem);
         menuItem = new JMenuItem("Tower:Poison");
         menuItem.addActionListener(menuListener);
-        popup.add(menuItem);
+        popup.add(menuItem);//*/
  
         //Add listener to the text area so the popup menu can come up.
         popupListener = new PopupListener(popup);
@@ -110,7 +117,7 @@ public class GamePanel extends JPanel{
 		Graphics2D g2D = (Graphics2D) g;
 		
 		//draws the map
-		map.Draw(g2D);
+		level.map.Draw(g2D);
 		
 		//goes through the list of towers and calls the draw method
 		for(int i = 0; i < towers.size(); i++){
@@ -132,21 +139,21 @@ public class GamePanel extends JPanel{
 	public void NewTower(ContentBank.TowerType inType){
 		Point2D tempPoint2D = null;
 		switch(inType){
-		case Fire:
-			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-			Tower tempFireTower = new FireTower("Fiya Towa", tempPoint2D, 1, this);
-			towers.add(tempFireTower);
-			break;
-		case Ice:
-			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-			Tower tempIceTower = new IceTower("Iyace Towa", tempPoint2D, 1, this);
-			towers.add(tempIceTower);
-			break;	
-		case Poison:
-			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
-			Tower tempPoisonTower = new PoisonTower("Poysan Towa", tempPoint2D, 1, this);
-			towers.add(tempPoisonTower);
-			break;
+//		case Fire:
+//			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+//			Tower tempFireTower = new FireTower("Fiya Towa", tempPoint2D, 1, this);
+//			towers.add(tempFireTower);
+//			break;
+//		case Ice:
+//			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+//			Tower tempIceTower = new IceTower("Iyace Towa", tempPoint2D, 1, this);
+//			towers.add(tempIceTower);
+//			break;	
+//		case Poison:
+//			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
+//			Tower tempPoisonTower = new PoisonTower("Poysan Towa", tempPoint2D, 1, this);
+//			towers.add(tempPoisonTower);
+//			break;
 		default:
 			tempPoint2D = bgf.CenterTileLocation(popupListener.GetPopupLocation(), 32);
 			Tower tempTower = new Tower("awesome", tempPoint2D, 1, this);
@@ -168,7 +175,7 @@ public class GamePanel extends JPanel{
 			repaint();
 			
 			if(timer >= 25){
-				Creep tempCreep = new Creep(1.0, map.mapPath, 10.0, 1);
+				Creep tempCreep = new Creep(1.0, level.map.mapPath, 10.0, 1);
 				creeps.add(tempCreep);
 				timer = 0;
 			}
@@ -190,7 +197,7 @@ public class GamePanel extends JPanel{
 			int key = arg0.getKeyCode();
 			
 			if(key == KeyEvent.VK_SPACE){
-				Creep tempCreep = new Creep(1.0, map.mapPath, 10.0, 1);
+				Creep tempCreep = new Creep(1.0, level.map.mapPath, 10.0, 1);
 				creeps.add(tempCreep);
 			}
 		}
@@ -217,7 +224,7 @@ public class GamePanel extends JPanel{
 			
 			if(arg0.paramString().contains("Standard")){
 				NewTower(ContentBank.TowerType.Standard);
-			}
+			}/*
 			if(arg0.paramString().contains("Fire")){
 				NewTower(ContentBank.TowerType.Fire);
 			}
@@ -226,7 +233,7 @@ public class GamePanel extends JPanel{
 			}
 			else if(arg0.paramString().contains("Poison")){
 				NewTower(ContentBank.TowerType.Poison);
-			}
+			}//*/
 		}
 	}
 	
